@@ -47,6 +47,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Extensions.Depend
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Extensions.DependencyInjection.Abstractions", "..\..\temp\DependencyInjection\src\Microsoft.Extensions.DependencyInjection.Abstractions\Microsoft.Extensions.DependencyInjection.Abstractions.csproj", "{CD94F8F3-17BE-47F6-A798-1E4EA2C3DF2F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.AspNetCore.Hosting", "..\..\temp\Hosting\src\Microsoft.AspNetCore.Hosting\Microsoft.AspNetCore.Hosting.csproj", "{D4244E52-B35A-44C1-B9C1-36474C8D40A4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.AspNetCore.Hosting.Abstractions", "..\..\temp\Hosting\src\Microsoft.AspNetCore.Hosting.Abstractions\Microsoft.AspNetCore.Hosting.Abstractions.csproj", "{1E53EB53-528B-4886-BA48-99D80B9DF1E0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.AspNetCore.Hosting.Server.Abstractions", "..\..\temp\Hosting\src\Microsoft.AspNetCore.Hosting.Server.Abstractions\Microsoft.AspNetCore.Hosting.Server.Abstractions.csproj", "{B5FFA69E-5037-4A5D-859A-327A78638BCF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Extensions.Hosting.Abstractions", "..\..\temp\Hosting\src\Microsoft.Extensions.Hosting.Abstractions\Microsoft.Extensions.Hosting.Abstractions.csproj", "{0202F5D4-8914-4A1D-A1F7-EF6CC10AFCAD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -121,6 +129,22 @@ Global
 		{CD94F8F3-17BE-47F6-A798-1E4EA2C3DF2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD94F8F3-17BE-47F6-A798-1E4EA2C3DF2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD94F8F3-17BE-47F6-A798-1E4EA2C3DF2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4244E52-B35A-44C1-B9C1-36474C8D40A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4244E52-B35A-44C1-B9C1-36474C8D40A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4244E52-B35A-44C1-B9C1-36474C8D40A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4244E52-B35A-44C1-B9C1-36474C8D40A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E53EB53-528B-4886-BA48-99D80B9DF1E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E53EB53-528B-4886-BA48-99D80B9DF1E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E53EB53-528B-4886-BA48-99D80B9DF1E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E53EB53-528B-4886-BA48-99D80B9DF1E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5FFA69E-5037-4A5D-859A-327A78638BCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5FFA69E-5037-4A5D-859A-327A78638BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5FFA69E-5037-4A5D-859A-327A78638BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5FFA69E-5037-4A5D-859A-327A78638BCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0202F5D4-8914-4A1D-A1F7-EF6CC10AFCAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0202F5D4-8914-4A1D-A1F7-EF6CC10AFCAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0202F5D4-8914-4A1D-A1F7-EF6CC10AFCAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0202F5D4-8914-4A1D-A1F7-EF6CC10AFCAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -145,6 +169,10 @@ Global
 		{1F9D86E4-4DC0-40F9-8582-BC37EA63AC13} = {F2A1CFAA-B46F-4699-93F2-86EBC47B9FC6}
 		{4BA98FA2-63E3-4947-806A-8D0F165B90CB} = {F2A1CFAA-B46F-4699-93F2-86EBC47B9FC6}
 		{CD94F8F3-17BE-47F6-A798-1E4EA2C3DF2F} = {F2A1CFAA-B46F-4699-93F2-86EBC47B9FC6}
+		{D4244E52-B35A-44C1-B9C1-36474C8D40A4} = {F2A1CFAA-B46F-4699-93F2-86EBC47B9FC6}
+		{1E53EB53-528B-4886-BA48-99D80B9DF1E0} = {F2A1CFAA-B46F-4699-93F2-86EBC47B9FC6}
+		{B5FFA69E-5037-4A5D-859A-327A78638BCF} = {F2A1CFAA-B46F-4699-93F2-86EBC47B9FC6}
+		{0202F5D4-8914-4A1D-A1F7-EF6CC10AFCAD} = {F2A1CFAA-B46F-4699-93F2-86EBC47B9FC6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CE939414-356E-451D-92B5-5D4F43A2E771}
