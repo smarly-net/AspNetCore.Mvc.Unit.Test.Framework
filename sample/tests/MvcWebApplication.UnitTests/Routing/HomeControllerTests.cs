@@ -1,8 +1,8 @@
 using AspNetCore.Mvc.Unit.Test.Framework.Routing;
-using MvcWebApplication.Controllers;
+using MvcApplication.Controllers;
 using Xunit;
 
-namespace MvcWebApplication.UnitTests.Routing
+namespace MvcApplication.UnitTests.Routing
 {
     public class HomeControllerTests
     {

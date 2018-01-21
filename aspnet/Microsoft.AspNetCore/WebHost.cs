@@ -1,5 +1,4 @@
-﻿/*
-// Decompiled with JetBrains decompiler
+﻿// Decompiled with JetBrains decompiler
 // Type: Microsoft.AspNetCore.WebHost
 // Assembly: Microsoft.AspNetCore, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60
 // MVID: 968FD0C4-FEC0-4F2F-91BC-F69CF8071DE5
@@ -172,8 +171,7 @@ namespace Microsoft.AspNetCore
                 logging.AddConfiguration((IConfiguration)hostingContext.Configuration.GetSection("Logging"));
                 logging.AddConsole();
                 logging.AddDebug();
-            }))/*.UseIISIntegration()#1#.UseDefaultServiceProvider((Action<WebHostBuilderContext, ServiceProviderOptions>)((context, options) => options.ValidateScopes = context.HostingEnvironment.IsDevelopment()));
+            }))/*.UseIISIntegration()*/.UseDefaultServiceProvider((Action<WebHostBuilderContext, ServiceProviderOptions>)((context, options) => options.ValidateScopes = context.HostingEnvironment.IsDevelopment()));
         }
     }
 }
-*/
