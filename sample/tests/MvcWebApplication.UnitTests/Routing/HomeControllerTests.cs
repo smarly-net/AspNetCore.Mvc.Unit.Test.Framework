@@ -15,14 +15,5 @@ namespace MvcApplication.UnitTests.Routing
                 .Equals<HomeController>(c => c.About());
 
         }
-        [Fact]
-        public void Test2()
-        {
-            new RoutingTest<Startup>()
-                .Setup()
-                .ShouldMap("/Home/Index1")
-                .Equals<HomeController>(c => c.About());
-
-        }
     }
 }
