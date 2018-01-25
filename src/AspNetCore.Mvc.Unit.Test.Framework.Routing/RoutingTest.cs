@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
@@ -12,21 +15,26 @@ namespace AspNetCore.Mvc.Unit.Test.Framework.Routing
 {
     public class RoutingTest<TStartup> where TStartup : class
     {
-            ServiceProvider serviceProvider;
-            ServiceCollection serviceCollection;
-            TStartup startup;
+        ServiceProvider serviceProvider;
+
         public RoutingTest<TStartup> Setup()
         {
-            //setup our DI
-            serviceCollection = new ServiceCollection();
-
-            serviceCollection.AddSingleton<TStartup>();
+            ServiceCollection serviceCollection = new ServiceCollection();
+            IHostingEnvironment hostingEnvironment = new HostingEnvironment { EnvironmentName = "Development" };
             serviceCollection.AddSingleton(typeof(Microsoft.Extensions.Configuration.IConfiguration), typeof(Conf));
 
-            serviceProvider = serviceCollection.BuildServiceProvider();
+            var startupType = typeof(TStartup);
 
-            //do the actual work here
-            startup = serviceProvider.GetService<TStartup>();
+            if (typeof(IStartup).GetTypeInfo().IsAssignableFrom(startupType.GetTypeInfo()))
+            {
+                serviceCollection.AddSingleton(typeof(IStartup), startupType);
+            }
+            else
+            {
+                serviceCollection.AddSingleton(typeof(IStartup), sp => new ConventionBasedStartup(StartupLoader.LoadMethods(sp, startupType, hostingEnvironment.EnvironmentName)));
+            }
+
+            serviceProvider = serviceCollection.BuildServiceProvider();
 
             return this;
         }
@@ -34,28 +42,27 @@ namespace AspNetCore.Mvc.Unit.Test.Framework.Routing
         public RoutingTest<TStartup> ShouldMap(string url)
         {
             this.Build();
-            return this; 
+            return this;
         }
 
         private RoutingTest<TStartup> Build()
         {
+            var startup = serviceProvider.GetService<IStartup>();
 
+            System.Diagnostics.Debug.Assert(startup != null);
+
+            var applicationProvider = startup.ConfigureServices(new ServiceCollection());
 
             return this;
         }
 
         public void Equals<TController>(Action<TController> p) where TController : ControllerBase
         {
-            startup.GetType().GetMethod("ConfigureServices").Invoke(startup, new[] { serviceCollection });
-            AppBuilder app = new AppBuilder(){ApplicationServices = serviceProvider };
-
-            app.UseMvc();
-
-            startup.GetType().GetMethod("Configure").Invoke(startup, new[] { app });
         }
     }
 
-    public class AppBuilder : IApplicationBuilder {
+    public class AppBuilder : IApplicationBuilder
+    {
         #region Implementation of IApplicationBuilder
 
         public IApplicationBuilder Use(Func<RequestDelegate, RequestDelegate> middleware)
