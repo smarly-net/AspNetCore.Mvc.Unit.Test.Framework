@@ -1,27 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Builder;
 using Microsoft.AspNetCore.Hosting.Internal;
+using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
+using Microsoft.Extensions.ObjectPool;
 using Microsoft.Extensions.Primitives;
+using Moq;
 
 namespace AspNetCore.Mvc.Unit.Test.Framework.Routing
 {
     public class RoutingTest<TStartup> where TStartup : class
     {
-        ServiceProvider serviceProvider;
+//        ServiceProvider serviceProvider;
+            IServiceCollection serviceCollection;
 
         public RoutingTest<TStartup> Setup()
         {
-            ServiceCollection serviceCollection = new ServiceCollection();
+
+            Trace.Write("Some Red Message");
+
+            serviceCollection = new ServiceCollection();
             IHostingEnvironment hostingEnvironment = new HostingEnvironment { EnvironmentName = "Development" };
             serviceCollection.AddSingleton(typeof(Microsoft.Extensions.Configuration.IConfiguration), typeof(Conf));
+            serviceCollection.AddSingleton(typeof(IHostingEnvironment), sp => hostingEnvironment);
+            serviceCollection.AddSingleton(typeof(IHostingEnvironment), sp => hostingEnvironment);
+
+            serviceCollection.AddSingleton<ObjectPoolProvider, DefaultObjectPoolProvider>();
+
+            var listener = new DiagnosticListener("Microsoft.AspNetCore");
+            serviceCollection.AddSingleton<DiagnosticListener>(listener);
+            serviceCollection.AddSingleton<DiagnosticSource>(listener);
+
+            ILoggerFactory f = new LoggerFactory(new []{ NullLoggerProvider.Instance });
+
+            Mock<ILoggerFactory> logger = new Mock<ILoggerFactory>();
+            serviceCollection.AddSingleton(typeof(ILoggerFactory), sp => f);
 
             var startupType = typeof(TStartup);
 
@@ -34,9 +58,19 @@ namespace AspNetCore.Mvc.Unit.Test.Framework.Routing
                 serviceCollection.AddSingleton(typeof(IStartup), sp => new ConventionBasedStartup(StartupLoader.LoadMethods(sp, startupType, hostingEnvironment.EnvironmentName)));
             }
 
-            serviceProvider = serviceCollection.BuildServiceProvider();
+//            serviceProvider = serviceCollection.BuildServiceProvider();
 
             return this;
+        }
+
+        public static IServiceCollection Clone(IServiceCollection serviceCollection)
+        {
+            IServiceCollection clone = new ServiceCollection();
+            foreach (var service in serviceCollection)
+            {
+                clone.Add(service);
+            }
+            return clone;
         }
 
         public RoutingTest<TStartup> ShouldMap(string url)
@@ -47,11 +81,20 @@ namespace AspNetCore.Mvc.Unit.Test.Framework.Routing
 
         private RoutingTest<TStartup> Build()
         {
-            var startup = serviceProvider.GetService<IStartup>();
+
+
+            var startup = Clone(serviceCollection).BuildServiceProvider().GetService<IStartup>();
 
             System.Diagnostics.Debug.Assert(startup != null);
 
-            var applicationProvider = startup.ConfigureServices(new ServiceCollection());
+            var applicationProvider = startup.ConfigureServices(serviceCollection);
+
+            ApplicationBuilderFactory f = new ApplicationBuilderFactory(applicationProvider);
+            FeatureCollection featureCollection = new FeatureCollection();
+            featureCollection.Set(new ServerAddressesFeature());
+            var builder = f.CreateBuilder(featureCollection);
+
+            startup.Configure(builder);
 
             return this;
         }
@@ -59,6 +102,15 @@ namespace AspNetCore.Mvc.Unit.Test.Framework.Routing
         public void Equals<TController>(Action<TController> p) where TController : ControllerBase
         {
         }
+    }
+
+    public class ServerAddressesFeature : IServerAddressesFeature {
+        #region Implementation of IServerAddressesFeature
+
+        public ICollection<string> Addresses { get; } = new List<string>();
+        public bool PreferHostingUrls { get; set; }
+
+        #endregion
     }
 
     public class AppBuilder : IApplicationBuilder
