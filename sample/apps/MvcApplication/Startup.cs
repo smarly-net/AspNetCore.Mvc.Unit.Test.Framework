@@ -58,25 +58,30 @@ namespace MvcApplication
             });
         }
 
-/*        #region Implementation of IStartup
-
-        public IServiceProvider ConfigureServices(IServiceCollection services)
+        public void ConfigureContainer(StartupBase builder)
         {
-            services.AddMvc();
-
-                        return services.BuildServiceProvider();
         }
 
-        public void Configure(IApplicationBuilder app)
-        {
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
-        }
 
-        #endregion*/
+        /*        #region Implementation of IStartup
+
+                public IServiceProvider ConfigureServices(IServiceCollection services)
+                {
+                    services.AddMvc();
+
+                                return services.BuildServiceProvider();
+                }
+
+                public void Configure(IApplicationBuilder app)
+                {
+                    app.UseMvc(routes =>
+                    {
+                        routes.MapRoute(
+                            name: "default",
+                            template: "{controller=Home}/{action=Index}/{id?}");
+                    });
+                }
+
+                #endregion*/
     }
 }

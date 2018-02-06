@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Net;
 using System.Reflection;
+using AspNetCore.Mvc.Unit.Test.Framework.Routing.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Builder;
@@ -27,6 +30,9 @@ namespace AspNetCore.Mvc.Unit.Test.Framework.Routing
 
         public RoutingTest<TStartup> Setup()
         {
+
+
+
 
             Trace.Write("Some Red Message");
 
