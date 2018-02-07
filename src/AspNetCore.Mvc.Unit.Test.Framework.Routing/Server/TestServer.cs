@@ -2,10 +2,13 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using AspNetCore.Mvc.Unit.Test.Framework.Routing.Mvc;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Mvc.Internal;
+using Microsoft.Extensions.DependencyInjection;
 using Context = Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context;
 
 namespace AspNetCore.Mvc.Unit.Test.Framework.Routing.Server
@@ -35,7 +38,14 @@ namespace AspNetCore.Mvc.Unit.Test.Framework.Routing.Server
 
             Features = featureCollection;
 
-            var host = builder.UseServer(this).Build();
+            var hostBuilder = builder.UseServer(this);
+
+            hostBuilder.ConfigureServices(services =>
+            {
+                services.AddSingleton(typeof(MvcRouteHandler), typeof(MockMvcRouteHandler));
+            });
+
+            var host = hostBuilder.Build();
             host.StartAsync().GetAwaiter().GetResult();
             _hostInstance = host;
         }

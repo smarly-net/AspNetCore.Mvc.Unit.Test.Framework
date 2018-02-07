@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2005
+VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4CACBB36-FB10-4BB7-99C5-A6548363E566}"
 EndProject
@@ -160,8 +160,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.AspNetCore.Authentication.Core", "..\..\temp\HttpAbstractions\src\Microsoft.AspNetCore.Authentication.Core\Microsoft.AspNetCore.Authentication.Core.csproj", "{01D0BCF2-5B0C-4342-A23F-E3185CBCFD17}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvcApplication", "sample\apps\MvcApplication\MvcApplication.csproj", "{CF984CD8-6BBA-4BCC-8494-8670113B2E2F}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.AspNetCore.Server.IISIntegration", "..\..\temp\IISIntegration\src\Microsoft.AspNetCore.Server.IISIntegration\Microsoft.AspNetCore.Server.IISIntegration.csproj", "{DF08EB6D-9570-4D0A-9CA6-E2E3F969A1A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -465,10 +463,6 @@ Global
 		{CF984CD8-6BBA-4BCC-8494-8670113B2E2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF984CD8-6BBA-4BCC-8494-8670113B2E2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF984CD8-6BBA-4BCC-8494-8670113B2E2F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DF08EB6D-9570-4D0A-9CA6-E2E3F969A1A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DF08EB6D-9570-4D0A-9CA6-E2E3F969A1A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DF08EB6D-9570-4D0A-9CA6-E2E3F969A1A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DF08EB6D-9570-4D0A-9CA6-E2E3F969A1A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -550,7 +544,6 @@ Global
 		{E705C307-15D8-4E20-A9D1-92EF1636460C} = {F2A1CFAA-B46F-4699-93F2-86EBC47B9FC6}
 		{01D0BCF2-5B0C-4342-A23F-E3185CBCFD17} = {F2A1CFAA-B46F-4699-93F2-86EBC47B9FC6}
 		{CF984CD8-6BBA-4BCC-8494-8670113B2E2F} = {3B60DE99-C01E-4F3A-8449-9A2DBB6A947F}
-		{DF08EB6D-9570-4D0A-9CA6-E2E3F969A1A8} = {F2A1CFAA-B46F-4699-93F2-86EBC47B9FC6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CE939414-356E-451D-92B5-5D4F43A2E771}
